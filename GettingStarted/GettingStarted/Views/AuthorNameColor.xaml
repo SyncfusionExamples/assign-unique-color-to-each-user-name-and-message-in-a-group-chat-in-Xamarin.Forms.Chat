@@ -1,0 +1,58 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:local="clr-namespace:GettingStarted"
+             xmlns:sfChat="clr-namespace:Syncfusion.XForms.Chat;assembly=Syncfusion.SfChat.XForms"
+             mc:Ignorable="d"
+             x:Class="GettingStarted.AuthorColor">
+    
+    <ContentPage.BindingContext>
+        <local:ViewModel x:Name="viewModel" />
+    </ContentPage.BindingContext>
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <local:AuthorColorConverter x:Name="authorColorConverter" x:Key="authorColorConverter" />
+
+            <!--Defining outgoing message author color-->
+            <Style TargetType="sfChat:OutgoingMessageAuthorView">
+                <Setter Property="ControlTemplate">
+                    <Setter.Value>
+                        <ControlTemplate>
+                            <Label Text="{Binding Author.Name}" BackgroundColor="Transparent" TextColor="{TemplateBinding BindingContext, Converter= {StaticResource authorColorConverter},ConverterParameter={x:Reference viewModel}}" BindingContext="{TemplateBinding BindingContext}"/>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+
+            <!--Defining incoming message author color-->
+            <Style TargetType="sfChat:IncomingMessageAuthorView">
+                <Setter Property="ControlTemplate">
+                    <Setter.Value>
+                        <ControlTemplate>
+                            <Label Text="{Binding Author.Name}" BackgroundColor="Transparent" TextColor="{TemplateBinding BindingContext, Converter= {StaticResource authorColorConverter},ConverterParameter={x:Reference viewModel}}" BindingContext="{TemplateBinding BindingContext}"/>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <ContentPage.Content>
+        <Grid x:Name="chatGrid">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <sfChat:SfChat x:Name="sfChat" 
+                           Grid.Row="0"
+                           AllowMultilineInput="True"
+                           Messages="{Binding Messages}"
+                           ShowIncomingMessageAuthorName="True"
+                           ShowOutgoingMessageAuthorName="True"
+                           CurrentUser="{Binding CurrentUser}">
+            </sfChat:SfChat>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>
