@@ -62,8 +62,6 @@ Converter:
 
 ```
 
-See [How to load Xamarin.Forms SfListView with background image?](https://www.syncfusion.com/kb/9479/how-to-load-listview-with-background-image) for more details.
-
 ## Requirements to run the demo
 
 * [Visual Studio 2017](https://visualstudio.microsoft.com/downloads/) or [Visual Studio for Mac](https://visualstudio.microsoft.com/vs/mac/)
